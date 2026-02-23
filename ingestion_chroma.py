@@ -146,22 +146,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-# -----------------------------------------------------------------------------
-# Quick answer: loading specific PDF pages with PyPDFLoader
-# -----------------------------------------------------------------------------
-# Yes — `PyPDFLoader` supports loading specific page ranges. Two common ways:
-# 1) Use the loader's `load` with `page_numbers` if supported by your langchain version:
-#
-#    loader = PyPDFLoader(path)
-#    docs = loader.load(page_numbers=[2,3,4])  # load pages 3-5 (0-based index)
-#
-# 2) Or load the full PDF and slice the returned documents (each item may be a page):
-#
-#    pages = loader.load()
-#    subset = pages[10:20]  # pages 11-20
-#
-# If you need precise control, you can also use `pypdf` or similar directly to extract
-# specific pages to a temporary PDF file and pass that file to `PyPDFLoader`.
-# -----------------------------------------------------------------------------
