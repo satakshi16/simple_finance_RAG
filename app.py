@@ -16,11 +16,11 @@ from langchain_core.messages import HumanMessage, AIMessage
 
 from agent_setup import build_agent
 
-# ── Logging ───────────────────────────────────────────────────
+# Logging 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# ── Page Config ───────────────────────────────────────────────
+# Page Config
 st.set_page_config(
     page_title="Financial AI Assistant",
     page_icon="📈",
@@ -28,7 +28,7 @@ st.set_page_config(
 )
 
 
-# ── Cache the agent so it persists across reruns ──────────────
+# Cache the agent so it persists across reruns
 @st.cache_resource
 def get_agent():
     return build_agent()
@@ -37,7 +37,7 @@ def get_agent():
 agent = get_agent()
 
 
-# ── Helper: render a single message ──────────────────────────
+# Helper: render a single message
 def render_message(msg: dict) -> None:
     """
     Render a chat message from session-state dict.
@@ -57,7 +57,7 @@ def render_message(msg: dict) -> None:
                 st.write(f"**Confidence Score:** {metadata['confidence']}")
 
 
-# ── Helper: extract response parts from agent output ─────────
+# Helper: extract response parts from agent output
 def parse_agent_response(response: dict) -> dict:
     """
     Pull out the answer text, tool used, sources, and confidence
@@ -177,20 +177,20 @@ def parse_agent_response(response: dict) -> dict:
     }
 
 
-# ── Session State Initialisation ─────────────────────────────
+# Session State Initialisation 
 if "ui_messages" not in st.session_state:
     st.session_state.ui_messages = []  # list[dict] for rendering
 if "langchain_messages" not in st.session_state:
     st.session_state.langchain_messages = []  # list[HumanMessage|AIMessage]
 
-# ── UI Header ─────────────────────────────────────────────────
+# UI Header
 st.title("📈 Financial AI Assistant")
 st.markdown(
     "Ask questions about *The Fundamental Principles of Financial Regulation* "
     "or general market finance."
 )
 
-# ══════════════════════════════════════════════════════════════
+# 
 # Render full chat history from session state.
 #
 # This is the ONLY place previous messages are drawn.  When a
@@ -201,11 +201,11 @@ st.markdown(
 # expander for message N is still visible when message N+1
 # arrives, because every message goes through the same
 # render_message() path.
-# ══════════════════════════════════════════════════════════════
+# 
 for msg in st.session_state.ui_messages:
     render_message(msg)
 
-# ── Handle new user input ─────────────────────────────────────
+#  Handle new user input
 if user_query := st.chat_input("Ask a financial question..."):
 
     # 1. Append user message to both stores
