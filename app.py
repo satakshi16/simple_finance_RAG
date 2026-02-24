@@ -177,7 +177,7 @@ def parse_agent_response(response: dict) -> dict:
     }
 
 
-# Session State Initialisation 
+# Session State Initialization 
 if "ui_messages" not in st.session_state:
     st.session_state.ui_messages = []  # list[dict] for rendering
 if "langchain_messages" not in st.session_state:
